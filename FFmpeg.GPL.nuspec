@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>FFmpeg.GPL</id>
+    <version>$version</version>
+    <authors>FFmpeg</authors>
+    <owners>IOL0ol1</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">GPL-3.0-or-later</license>
+    <licenseUrl>https://licenses.nuget.org/GPL-3.0-or-later</licenseUrl>
+    <projectUrl>https://ffmpeg.org/</projectUrl>
+    <icon>favicon.png</icon>
+    <description>Headers, import libraries, and runtime dlls for FFmpeg, based on the official FFmpeg windows builds.</description>
+    <summary>Headers, import libraries, and runtime dlls for FFmpeg.</summary>
+    <tags>ffmpeg media video audio capture encode decode encoding decoding codec native nativepackage</tags>
+  </metadata>
+  <files>
+  	<file src=".\README.txt" target=""/>
+  	<file src=".\favicon.png" target="favicon.png"/>
+	<file src=".\bin\*.dll" target="build\native\bin"/>
+	<file src=".\doc\**" target="build\native\doc"/>
+	<file src=".\include\**" target="build\native\include"/>
+	<file src=".\lib\*.lib" target="build\native\lib"/>
+	<file src=".\LICENSE.txt" target="build\native\LICENSE.txt"/>
+	<file src=".\FFmpeg.GPL.targets" target="build\native\FFmpeg.GPL.targets"/>
+  </files>
+</package>
