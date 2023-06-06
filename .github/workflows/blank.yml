@@ -37,6 +37,18 @@ jobs:
           # Name of the downloaded ZIP file
           ZIPname: ffmpeg-master-latest-win64-gpl-shared
           
+      - name: Download & Extract
+        # You may pin to the exact commit or the version.
+        # uses: gamedev-thingy/Download-Extract@20063b5f6b2b847425c9e3ff02830b19bcb66d70
+        uses: gamedev-thingy/Download-Extract@done
+        with:
+          # The URL to download from
+          url: https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-lgpl-shared.zip
+          # Where the files will be extracted to
+          destination: .
+          # Name of the downloaded ZIP file
+          ZIPname: ffmpeg-master-latest-win64-lgpl-shared
+          
       - name: Setup NuGet.exe for use with actions
         # You may pin to the exact commit or the version.
         # uses: NuGet/setup-nuget@296fd3ccf8528660c91106efefe2364482f86d6f
@@ -52,16 +64,16 @@ jobs:
         run: |
               $Folder = "ffmpeg-master-latest-win64-gpl-shared"
               $Datetime = Get-Date -Format "yyyyMMdd"
-              $Version = $Datetime + "1.0"
+              $Version = $Datetime + ".1.0"
               $Filename = "FFmpeg.GPL.nuspec"
               $NewFileName = "FFmpeg.GPL-" + $Version + ".nuspec"
-              $Oldvalue = "$version"
+              $Oldvalue = '$version'
               $content = get-content $Filename
               foreach($line in $content) {
                 $liner=$line.Replace($Oldvalue, $Version)
-                Add-content $NewFilename -Value $line
+                Add-content $NewFilename -Value $liner
               }
-              Get-ChildItem ./ -File | Copy-Item -Destination $Folder -Confirm -Force
+              Get-ChildItem ./ -File | Copy-Item -Destination $Folder -Force
               ls
               cd $Folder
               nuget pack $NewFileName
