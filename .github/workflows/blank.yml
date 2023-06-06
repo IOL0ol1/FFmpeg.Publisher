@@ -33,9 +33,9 @@ jobs:
           # The URL to download from
           url: https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip
           # Where the files will be extracted to
-          destination: ${GITHUB_WORKSPACE}
+          destination: .
           # Name of the downloaded ZIP file
-          ZIPname: ffmpeg-master-latest-win64-gpl-shared.zip
+          ZIPname: ffmpeg-master-latest-win64-gpl-shared
           
       - name: Setup NuGet.exe for use with actions
         # You may pin to the exact commit or the version.
