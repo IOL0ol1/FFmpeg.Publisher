@@ -62,20 +62,22 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Update version
         run: |
-              $Folder = "ffmpeg-master-latest-win64-gpl-shared"
-              $Datetime = Get-Date -Format "yyyyMMdd"
-              $Version = $Datetime + ".1.0"
-              $Filename = "FFmpeg.GPL.nuspec"
-              $NewFileName = "FFmpeg.GPL.SS.nuspec"
-              $Oldvalue = '$version'
-              $content = get-content $Filename
+              $id = "FFmpeg.GPL"
+              $version = (Get-Date -Format "yyyyMMdd") + ".1.0"
+              $folder = "ffmpeg-master-latest-win64-gpl-shared"
+              $srcfile = "FFmpeg.targets"
+              $dstfile = $id + ".targets"
+              Copy-Item $srcfile -Destination ($folder + "/" + $dstfile) -Force
+              $srcfile = "FFmpeg.nuspec"
+              $dstfile = $id + "." + $version  + ".nuspec"
+              $content = get-content $srcfile
               foreach($line in $content) {
-                $liner=$line.Replace($Oldvalue, $Version)
-                Add-content $NewFilename -Value $liner
+                $dstline = $line.Replace('$version', $version).Replace('$id', $id)
+                Add-content ($folder + "/" + $dstfile) -Value $dstline
               }
-              Get-ChildItem ./ -File | Copy-Item -Destination $Folder -Force
-              cd $Folder
-              nuget pack $NewFileName
+              Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
+              cd $folder
+              nuget pack $dstfile
               
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
