@@ -1,3 +1,7 @@
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!! Only x64 supported !!!!!!!!!!!!!!!!!!!!!!!!!
+
 This nuget package contains headers, import libraries, and runtime
 dlls for FFmpeg for use with Visual Studio. It is based on the 
 FFmpeg windows builds from https://github.com/BtbN/FFmpeg-Builds/releases
