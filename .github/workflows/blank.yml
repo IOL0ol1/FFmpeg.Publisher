@@ -63,7 +63,7 @@ jobs:
             }
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
-            nuget setApiKey ${{ secrets.NUGET_KEY }}
+            nuget setApiKey $env:NUGET_KEY
             nuget pack $dstfile
             nuget push $dstfile -Source https://api.nuget.org/v3/index.json
 
@@ -97,7 +97,7 @@ jobs:
             }
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
-            nuget setApiKey ${{ secrets.NUGET_KEY }}
+            nuget setApiKey $env:NUGET_KEY
             nuget pack $dstfile
             nuget push $dstfile -Source https://api.nuget.org/v3/index.json
 
