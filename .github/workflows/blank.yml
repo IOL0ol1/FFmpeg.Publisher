@@ -64,7 +64,7 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-            nuget push $dstfile --source https://api.nuget.org/v3/index.json
+            nuget push $dstfile
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
@@ -97,7 +97,7 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-            nuget push $dstfile --source https://api.nuget.org/v3/index.json
+            nuget push $dstfile
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
