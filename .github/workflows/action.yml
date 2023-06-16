@@ -66,9 +66,8 @@ jobs:
             }
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
-            nuget setApiKey $env:NUGET_KEY
             nuget pack $dstfile
-            nuget push $dstfile -Source https://api.nuget.org/v3/index.json
+            nuget push $dstfile $env:NUGET_KEY -Source https://api.nuget.org/v3/index.json
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
@@ -103,9 +102,8 @@ jobs:
             }
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
-            nuget setApiKey $env:NUGET_KEY
             nuget pack $dstfile
-            nuget push $dstfile -Source https://api.nuget.org/v3/index.json
+            nuget push $dstfile $env:NUGET_KEY -Source https://api.nuget.org/v3/index.json
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
