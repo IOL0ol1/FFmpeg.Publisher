@@ -44,7 +44,7 @@ jobs:
         shell: pwsh
         env: 
             NUGET_KEY: ${{ secrets.NUGET_KEY }}
-            NNN: ${{ NUGET.NUGET_KEY }}
+            NNN: ${{ secrets.NUGET.NUGET_KEY }}
         run: |
             echo $env
             cd FFmpeg
