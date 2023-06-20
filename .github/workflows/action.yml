@@ -82,7 +82,7 @@ jobs:
         env: 
             NUGET_KEY: ${{ secrets.NUGET_KEY }}
         run: |
-            cd FFmpeg
+            cd ../FFmpeg
             $folder = "ffmpeg-master-latest-win64-lgpl-shared"
             $zipFile = "./" + $folder + ".zip"
             Invoke-WebRequest -Uri "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-lgpl-shared.zip" -OutFile $zipFile
@@ -96,7 +96,7 @@ jobs:
             Copy-Item $srcfile -Destination ($folder + "/" + $dstfile) -Force
             $srcfile = "FFmpeg.nuspec"
             $dstfile = $id + "." + $version  + ".nuspec"
-                     $dstpack = $id + "." + $version  + ".nupkg"
+            $dstpack = $id + "." + $version  + ".nupkg"
             $content = get-content $srcfile
             foreach($line in $content) {
               $dstline = $line.Replace('$version', $version).Replace('$id', $id)
