@@ -44,8 +44,9 @@ jobs:
         shell: pwsh
         env: 
             NUGET_KEY: ${{ secrets.NUGET_KEY }}
+            NNN: ${{ NUGET.NUGET_KEY }}
         run: |
-            echo $env:NUGET_KEY
+            echo $env
             cd FFmpeg
             $folder = "ffmpeg-master-latest-win64-gpl-shared"
             $zipFile = "./" + $folder + ".zip"
