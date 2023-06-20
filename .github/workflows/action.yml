@@ -37,17 +37,15 @@ jobs:
           # NuGet version to install. Can be `latest`, `preview`, a concrete version like `5.3.1`, or a semver range specifier like `5.x`.
           nuget-version: latest
           # NuGet API Key to configure.
-          nuget-api-key: ${{ secrets.NUGET_KEY }}
+          nuget-api-key: ${{secrets.NUGET_KEY}}
         
       # Runs a set of commands using the runners shell
       - name: Pack & Push GPL nuget
         shell: pwsh
         env: 
-            NUGET_KEY: ${{ secrets.NUGET_KEY }}
-            NNN: ${{ secrets.NUGET.NUGET_KEY }}
+            NUGET_KEY: ${{secrets.NUGET_KEY}} 
         run: |
-            echo $env
-            cd FFmpeg
+            cd ../FFmpeg
             $folder = "ffmpeg-master-latest-win64-gpl-shared"
             $zipFile = "./" + $folder + ".zip"
             Invoke-WebRequest -Uri "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip" -OutFile $zipFile
@@ -61,6 +59,7 @@ jobs:
             Copy-Item $srcfile -Destination ($folder + "/" + $dstfile) -Force
             $srcfile = "FFmpeg.nuspec"
             $dstfile = $id + "." + $version  + ".nuspec"
+            $dstpack = $id + "." + $version  + ".nupkg"
             $content = get-content $srcfile
             foreach($line in $content) {
               $dstline = $line.Replace('$version', $version).Replace('$id', $id)
@@ -69,8 +68,7 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-            nuget setApiKey $env:NUGET_KEY
-            nuget push $dstfile -Source https://api.nuget.org/v3/index.json
+            nuget push $dstpack -Source https://api.nuget.org/v3/index.json -ApiKey '"' + $env:NUGET_KEY + '"'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
@@ -98,6 +96,7 @@ jobs:
             Copy-Item $srcfile -Destination ($folder + "/" + $dstfile) -Force
             $srcfile = "FFmpeg.nuspec"
             $dstfile = $id + "." + $version  + ".nuspec"
+                     $dstpack = $id + "." + $version  + ".nupkg"
             $content = get-content $srcfile
             foreach($line in $content) {
               $dstline = $line.Replace('$version', $version).Replace('$id', $id)
@@ -106,8 +105,7 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-            nuget setApiKey $env:NUGET_KEY
-            nuget push $dstfile -Source https://api.nuget.org/v3/index.json
+            nuget push $dstpack -Source https://api.nuget.org/v3/index.json -ApiKey '"' + $env:NUGET_KEY + '"'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
