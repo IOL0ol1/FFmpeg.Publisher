@@ -45,6 +45,7 @@ jobs:
         env: 
             NUGET_KEY: ${{ secrets.NUGET_KEY }}
         run: |
+            echo $env:NUGET_KEY
             cd FFmpeg
             $folder = "ffmpeg-master-latest-win64-gpl-shared"
             $zipFile = "./" + $folder + ".zip"
@@ -67,7 +68,8 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-            nuget push $dstfile $env:NUGET_KEY -Source https://api.nuget.org/v3/index.json
+            nuget setApiKey $env:NUGET_KEY
+            nuget push $dstfile -Source https://api.nuget.org/v3/index.json
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
@@ -103,7 +105,8 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-            nuget push $dstfile $env:NUGET_KEY -Source https://api.nuget.org/v3/index.json
+            nuget setApiKey $env:NUGET_KEY
+            nuget push $dstfile -Source https://api.nuget.org/v3/index.json
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
