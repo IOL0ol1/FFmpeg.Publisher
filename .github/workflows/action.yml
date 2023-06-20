@@ -68,7 +68,7 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-            nuget push $dstpack -Source https://api.nuget.org/v3/index.json -ApiKey '"' + $env:NUGET_KEY + '"' -SkipDuplicate
+            nuget push $dstpack -SkipDuplicate -Source https://api.nuget.org/v3/index.json -ApiKey '"' + $env:NUGET_KEY + '"'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
@@ -80,7 +80,7 @@ jobs:
       - name: Pack & Push LGPL nuget
         shell: pwsh
         env: 
-            NUGET_KEY: ${{ secrets.NUGET_KEY }}
+            NUGET_KEY: ${{secrets.NUGET_KEY}}
         run: |
             cd FFmpeg
             $folder = "ffmpeg-master-latest-win64-lgpl-shared"
@@ -105,7 +105,7 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-            nuget push $dstpack -Source https://api.nuget.org/v3/index.json -ApiKey '"' + $env:NUGET_KEY + '"' -SkipDuplicate
+            nuget push $dstpack -SkipDuplicate -Source https://api.nuget.org/v3/index.json -ApiKey '"' + $env:NUGET_KEY + '"'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
