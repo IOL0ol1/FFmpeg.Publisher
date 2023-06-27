@@ -7,6 +7,7 @@ Remove-Item $zipFile -Force
 
 $id = "FFmpeg.LGPL"
 $version = (Get-Date -Format "yyyyMMdd") + ".1.0"
+$license = "LGPL-3.0-or-later"
 $srcfile = "FFmpeg.targets"
 $dstfile = $id + ".targets"
 Copy-Item $srcfile -Destination ($folder + "/" + $dstfile) -Force
@@ -14,7 +15,7 @@ $srcfile = "FFmpeg.nuspec"
 $dstfile = $id + "." + $version  + ".nuspec"
 $content = get-content $srcfile
 foreach($line in $content) {
-  $dstline = $line.Replace('$version', $version).Replace('$id', $id)
+  $dstline = $line.Replace('$version', $version).Replace('$id', $id).Replace('$license',$license)
   Add-content ($folder + "/" + $dstfile) -Value $dstline
 }
 Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
