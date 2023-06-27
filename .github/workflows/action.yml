@@ -28,6 +28,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3.2.0
  
       - name: Setup NuGet.exe for use with actions
         # You may pin to the exact commit or the version.
@@ -68,7 +71,7 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-            nuget push $dstpack -SkipDuplicate -Source https://api.nuget.org/v3/index.json -ApiKey '"' + $env:NUGET_KEY + '"'
+            dotnet nuget push $dstpack --skip-duplicate -s https://api.nuget.org/v3/index.json -k '"' + $env:NUGET_KEY + '"'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
@@ -105,7 +108,7 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-            nuget push $dstpack -SkipDuplicate -Source https://api.nuget.org/v3/index.json -ApiKey '"' + $env:NUGET_KEY + '"'
+            dotnet nuget push $dstpack --skip-duplicate -s https://api.nuget.org/v3/index.json -k '"' + $env:NUGET_KEY + '"'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
