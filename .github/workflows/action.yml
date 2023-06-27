@@ -66,7 +66,16 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-
+            
+      - name: NuGet push
+        # You may pin to the exact commit or the version.
+        # uses: edumserrano/nuget-push@2c99a0cae97df631eb2526ddd171a55dd5228289
+        uses: edumserrano/nuget-push@v1.2.2
+        with:
+          # The API key for the NuGet server. Used when pushing the NuGet packages and symbols.
+          api-key: '${{secrets.NUGET_KEY}}'
+          working-directory: 'FFmpeg/ffmpeg-master-latest-win64-gpl-shared'
+          
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
         with: 
@@ -100,13 +109,7 @@ jobs:
             Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
             cd $folder
             nuget pack $dstfile
-
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3.1.2
-        with: 
-          # A file, directory or wildcard pattern that describes what to upload
-          path: FFmpeg/ffmpeg-master-latest-win64-lgpl-shared/*.nupkg
-          
+            
       - name: NuGet push
         # You may pin to the exact commit or the version.
         # uses: edumserrano/nuget-push@2c99a0cae97df631eb2526ddd171a55dd5228289
@@ -114,6 +117,14 @@ jobs:
         with:
           # The API key for the NuGet server. Used when pushing the NuGet packages and symbols.
           api-key: '${{secrets.NUGET_KEY}}'
-          working-directory: 'FFmpeg'
+          working-directory: 'FFmpeg/ffmpeg-master-latest-win64-lgpl-shared'
+          
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.2
+        with: 
+          # A file, directory or wildcard pattern that describes what to upload
+          path: FFmpeg/ffmpeg-master-latest-win64-lgpl-shared/*.nupkg
+          
+
     
               
