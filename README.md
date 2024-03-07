@@ -1,9 +1,11 @@
 FFmpeg.Publisher
 ======================
 
-FFmpeg auto nuget publisher for https://github.com/BtbN/FFmpeg-Builds/releases
+FFmpeg auto nuget publisher for    
+https://github.com/BtbN/FFmpeg-Builds/releases
 
-Only x64 supported for vc++ project 
+- **[BtbN/FFmpeg-Builds](https://github.com/BtbN/FFmpeg-Builds/releases)** only provides x64 binaries    
+- Can be used in either C# or C++ projects
 
 **FFmpeg.GPL**     
 [![NuGet version (FFmpeg.GPL)](https://img.shields.io/nuget/v/FFmpeg.GPL.svg)](https://www.nuget.org/packages/FFmpeg.GPL/)

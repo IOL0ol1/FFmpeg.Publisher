@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Target Name="CHECKPLATFORM" BeforeTargets="PrepareForBuild">
-    <Error Condition="'$(PlatformTarget)' == 'x86'" Text="$(MSBuildThisFileName) only x64 supported !" />
-  </Target>
   <ItemGroup>
     <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)bin\*.dll" />
   </ItemGroup>
