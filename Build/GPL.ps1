@@ -3,7 +3,7 @@ $id = "FFmpeg.GPL"
 $license = "GPL-3.0-or-later"
 $folder = "ffmpeg-master-latest-win64-gpl-shared"
 $zipFile = "./" + $folder + ".zip"
-#Invoke-WebRequest -Uri "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip" -OutFile $zipFile
+Invoke-WebRequest -Uri "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip" -OutFile $zipFile
 Expand-Archive -Path $zipFile -DestinationPath ./ -Force
 Remove-Item $zipFile -Force
 
