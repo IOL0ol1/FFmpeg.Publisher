@@ -15,8 +15,7 @@ $srcfile = "FFmpeg.targets"
 $dstfile = $id + ".targets"
 Copy-Item $srcfile -Destination ($folder + "/" + $dstfile) -Force
 $srcfile = "FFmpeg.nuspec"
-$dstfile = $id + "." + $version  + ".nuspec" 
-Set-Content -Path ($folder + "/" + $dstfile) -Value ""
+$dstfile = $id + "." + $version  + ".nuspec"
 $content = get-content $srcfile
 foreach($line in $content) {
   $dstline = $line.Replace('$version', $version).Replace('$id', $id).Replace('$license',$license)
