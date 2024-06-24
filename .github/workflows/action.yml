@@ -28,7 +28,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - uses: gautamkrishnar/keepalive-workflow@master
+      - uses: gautamkrishnar/keepalive-workflow@2.0.1
       - name: Setup NuGet.exe for use with actions
         # You may pin to the exact commit or the version.
         # uses: NuGet/setup-nuget@296fd3ccf8528660c91106efefe2364482f86d6f
