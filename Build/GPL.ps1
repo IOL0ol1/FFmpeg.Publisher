@@ -1,27 +1,44 @@
-﻿cd ../FFmpeg
+﻿ cd ../FFmpeg
+# Env
 $id = "FFmpeg.GPL"
 $license = "GPL-3.0-or-later"
 $folder = "ffmpeg-master-latest-win64-gpl-shared"
-$zipFile = "./" + $folder + ".zip"
-Invoke-WebRequest -Uri "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip" -OutFile $zipFile
-Expand-Archive -Path $zipFile -DestinationPath ./ -Force
-Remove-Item $zipFile -Force
-
 $version = (Get-Date -Format "yyyyMMdd") + ".1.0"
-$srcfile = "FFmpeg.props"
-$dstfile = $id + ".props"
-Copy-Item $srcfile -Destination ($folder + "/" + $dstfile) -Force
-$srcfile = "FFmpeg.targets"
-$dstfile = $id + ".targets"
-Copy-Item $srcfile -Destination ($folder + "/" + $dstfile) -Force
-$srcfile = "FFmpeg.nuspec"
-$dstfile = $id + "." + $version  + ".nuspec"
-$content = get-content $srcfile
-foreach($line in $content) {
-  $dstline = $line.Replace('$version', $version).Replace('$id', $id).Replace('$license',$license)
-  Add-content ($folder + "/" + $dstfile) -Value $dstline
-}
-Get-ChildItem ./ -File | Copy-Item -Destination $folder -Force
-cd $folder
-nuget pack $dstfile
 
+$zipFile = "./" + $folder + ".zip"
+
+# Download and expand FFmpeg
+Invoke-WebRequest -Uri "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip" -OutFile $zipFile
+ 
+Expand-Archive -Path $zipFile -DestinationPath ./ -Force
+ 
+cd $folder
+
+# Get all lib file name
+$libraries = (Get-ChildItem -Path 'lib' -Filter *.lib | Select-Object -ExpandProperty Name) -join ';'
+ 
+ New-Item -ItemType Directory -Path 'native' -Force
+ New-Item -ItemType Directory -Path 'netstandard' -Force
+# Copy file
+$srcFile = "../native/FFmpeg.targets"
+$dstFile = "native/$id.targets" 
+(Get-Content $srcFile) -replace '\$libraries', $libraries | Set-Content $dstFile
+ 
+$srcFile = "../netstandard/FFmpeg.targets"
+$dstFile = "netstandard/$id.targets"
+Copy-Item $srcFile -Destination $dstFile -Recurse -Force
+
+$srcFile = "../favicon.png"
+$dstFile = "favicon.png"
+Copy-Item $srcFile -Destination $dstFile -Force
+
+$srcFile = "../README.md"
+$dstFile = "README.md"
+Copy-Item $srcFile -Destination $dstFile -Force
+
+$srcFile = "../FFmpeg.nuspec"
+$dstFile = "$id.$version.nuspec" 
+(Get-Content $srcFile) -replace '\$version', $version -replace '\$id', $id -replace '\$license', $license | Set-Content $dstFile
+ 
+# nuget pack
+nuget pack $dstFile

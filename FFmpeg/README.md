@@ -1,5 +1,4 @@
-- **BtbN/FFmpeg-Builds** only provides x64 binaries    
-- Can be used in either C# or C++ projects
+Based on the official FFmpeg BtbN/FFmpeg-Builds. Support C/C++ and C# project.
 
 This nuget package contains headers, import libraries, and runtime    
 dlls for FFmpeg for use with Visual Studio. It is based on the     

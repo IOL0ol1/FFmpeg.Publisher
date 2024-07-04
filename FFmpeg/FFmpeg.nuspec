@@ -11,7 +11,7 @@
 		<projectUrl>https://ffmpeg.org/</projectUrl>
 		<repository type="git" url="https://github.com/IOL0ol1/FFmpeg.Publisher.git"/>
 		<icon>favicon.png</icon>
-		<description>Headers, import libraries, and runtime dlls for FFmpeg, based on the official FFmpeg windows builds.</description>
+		<description>Headers, import libraries, and runtime dlls for FFmpeg, based on the official FFmpeg BtbN/FFmpeg-Builds. Support C/C++ and C# project.</description>
 		<summary>Headers, import libraries, and runtime dlls for FFmpeg.</summary>
 		<tags>ffmpeg media video audio capture encode decode encoding decoding codec native nativepackage</tags>
 		<readme>README.md</readme>
@@ -21,16 +21,16 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src=".\README.md" target=".\"/>
-		<file src=".\favicon.png" target="favicon.png"/>
+		<file src=".\LICENSE.txt" target="build\native\LICENSE.txt"/>
 		<file src=".\bin\*.dll" target="build\native\bin"/>
 		<file src=".\doc\**" target="build\native\doc"/>
 		<file src=".\include\**" target="build\native\include"/>
 		<file src=".\lib\*.lib" target="build\native\lib"/>
-		<file src=".\LICENSE.txt" target="build\native\LICENSE.txt"/>
-		<file src=".\$id.targets" target="build\native\$id.targets"/>
-		<file src=".\$id.props" target="build\netstandard\$id.props" />
 		<file src=".\bin\*.dll" target="runtimes\win-x64\native"/>
+		<file src=".\native\$id.targets" target="build\native\$id.targets"/>
+		<file src=".\netstandard\$id.targets" target="build\netstandard\$id.targets" />
+		<file src=".\README.md" target=".\"/>
+		<file src=".\favicon.png" target=".\"/>
 		<file src=".\README.md" target="lib\netstandard2.0\_._"/>
 		<file src=".\README.md" target="lib\netstandard2.1\_._"/>
 	</files>
