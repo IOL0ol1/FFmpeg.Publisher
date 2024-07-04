@@ -85,6 +85,14 @@ jobs:
           path: FFmpeg/ffmpeg-master-latest-win64-lgpl-shared/*.nupkg
 
       
+      - name: Action Archiver
+        # You may pin to the exact commit or the version.
+        # uses: sibiraj-s/action-archiver@2f343a7eece20fe27cb9d3a8012d2c74b3030d79
+        uses: sibiraj-s/action-archiver@v1.1.2
+        with:
+          # A File or directory or glob pattern to archive
+          path: FFmpeg/**/*.nupkg
+
           
 
     
