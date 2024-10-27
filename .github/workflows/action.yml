@@ -17,6 +17,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+permissions:
+  actions: write
+  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -27,7 +30,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup NuGet.exe for use with actions
         # You may pin to the exact commit or the version.
         # uses: NuGet/setup-nuget@296fd3ccf8528660c91106efefe2364482f86d6f
@@ -91,8 +94,10 @@ jobs:
         with:
           # A File or directory or glob pattern to archive
           path: FFmpeg/**/*.nupkg
+
+      - uses: gautamkrishnar/keepalive-workflow@v2
           
-      - uses: gautamkrishnar/keepalive-workflow@2.0.1
+
 
           
 
