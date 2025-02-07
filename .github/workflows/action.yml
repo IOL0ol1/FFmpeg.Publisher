@@ -58,7 +58,7 @@ jobs:
           working-directory: 'FFmpeg/ffmpeg-master-latest-win64-gpl-shared'
           
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v4
         with: 
           # A file, directory or wildcard pattern that describes what to upload
           path: FFmpeg/ffmpeg-master-latest-win64-gpl-shared/*.nupkg
@@ -81,7 +81,7 @@ jobs:
           working-directory: 'FFmpeg/ffmpeg-master-latest-win64-lgpl-shared'
           
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v4
         with: 
           # A file, directory or wildcard pattern that describes what to upload
           path: FFmpeg/ffmpeg-master-latest-win64-lgpl-shared/*.nupkg
