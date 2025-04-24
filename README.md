@@ -15,3 +15,6 @@ https://github.com/BtbN/FFmpeg-Builds/releases
 [![NuGet version (FFmpeg.LGPL)](https://img.shields.io/nuget/v/FFmpeg.LGPL.svg)](https://www.nuget.org/packages/FFmpeg.LGPL/)
 [![NuGet downloads (FFmpeg.LGPL)](https://img.shields.io/nuget/dt/FFmpeg.LGPL.svg)](https://www.nuget.org/packages/FFmpeg.LGPL/) 
 
+
+--------------
+Last updated: 2025-04-24
