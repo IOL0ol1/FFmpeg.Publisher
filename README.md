@@ -17,4 +17,4 @@ https://github.com/BtbN/FFmpeg-Builds/releases
 
 
 --------------
-Last updated: 2026-01-22 02:03:02
+Last updated: 2026-01-23 01:58:41
