@@ -19,6 +19,7 @@ on:
 
 permissions:
   actions: write
+  id-token: write
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -38,8 +39,6 @@ jobs:
         with:
           # NuGet version to install. Can be `latest`, `preview`, a concrete version like `5.3.1`, or a semver range specifier like `5.x`.
           nuget-version: latest
-          # NuGet API Key to configure.
-          nuget-api-key: ${{secrets.NUGET_KEY}}
         
       # Runs a set of commands using the runners shell
       - name: Pack & Push GPL nuget
@@ -47,15 +46,18 @@ jobs:
         run: |
             cd Build
             powershell ./GPL.ps1
-            
-      - name: NuGet push
-        # You may pin to the exact commit or the version.
-        # uses: edumserrano/nuget-push@2c99a0cae97df631eb2526ddd171a55dd5228289
-        uses: edumserrano/nuget-push@v1.2.2
+
+      # Exchanges the GitHub OIDC token for a short-lived nuget.org API key (Trusted Publishing)
+      - name: NuGet Login
+        uses: NuGet/login@v1
+        id: nuget-login-gpl
         with:
-          # The API key for the NuGet server. Used when pushing the NuGet packages and symbols.
-          api-key: '${{secrets.NUGET_KEY}}'
-          working-directory: 'FFmpeg/ffmpeg-master-latest-win64-gpl-shared'
+          user: IOL0ol1
+
+      - name: NuGet push
+        shell: pwsh
+        run: |
+            nuget push "FFmpeg/ffmpeg-master-latest-win64-gpl-shared/*.nupkg" -Source https://api.nuget.org/v3/index.json -ApiKey "${{ steps.nuget-login-gpl.outputs.NUGET_API_KEY }}"
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
@@ -71,15 +73,17 @@ jobs:
             cd Build
             powershell ./LGPL.ps1
 
-            
-      - name: NuGet push
-        # You may pin to the exact commit or the version.
-        # uses: edumserrano/nuget-push@2c99a0cae97df631eb2526ddd171a55dd5228289
-        uses: edumserrano/nuget-push@v1.2.2
+      # Exchanges the GitHub OIDC token for a short-lived nuget.org API key (Trusted Publishing)
+      - name: NuGet Login
+        uses: NuGet/login@v1
+        id: nuget-login-lgpl
         with:
-          # The API key for the NuGet server. Used when pushing the NuGet packages and symbols.
-          api-key: '${{secrets.NUGET_KEY}}'
-          working-directory: 'FFmpeg/ffmpeg-master-latest-win64-lgpl-shared'
+          user: IOL0ol1
+
+      - name: NuGet push
+        shell: pwsh
+        run: |
+            nuget push "FFmpeg/ffmpeg-master-latest-win64-lgpl-shared/*.nupkg" -Source https://api.nuget.org/v3/index.json -ApiKey "${{ steps.nuget-login-lgpl.outputs.NUGET_API_KEY }}"
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
