@@ -57,7 +57,12 @@ jobs:
       - name: NuGet push
         shell: pwsh
         run: |
-            nuget push "FFmpeg/ffmpeg-master-latest-win64-gpl-shared/*.nupkg" -Source https://api.nuget.org/v3/index.json -ApiKey "${{ steps.nuget-login-gpl.outputs.NUGET_API_KEY }}"
+            $packages = @(Get-ChildItem "FFmpeg/ffmpeg-master-latest-win64-gpl-shared/*.nupkg")
+            if ($packages.Count -eq 0) { throw "No .nupkg found in FFmpeg/ffmpeg-master-latest-win64-gpl-shared/" }
+            foreach ($package in $packages) {
+                nuget push $package.FullName -Source https://api.nuget.org/v3/index.json -ApiKey "${{ steps.nuget-login-gpl.outputs.NUGET_API_KEY }}"
+                if ($LASTEXITCODE -ne 0) { throw "nuget push failed with exit code $LASTEXITCODE" }
+            }
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
@@ -83,7 +88,12 @@ jobs:
       - name: NuGet push
         shell: pwsh
         run: |
-            nuget push "FFmpeg/ffmpeg-master-latest-win64-lgpl-shared/*.nupkg" -Source https://api.nuget.org/v3/index.json -ApiKey "${{ steps.nuget-login-lgpl.outputs.NUGET_API_KEY }}"
+            $packages = @(Get-ChildItem "FFmpeg/ffmpeg-master-latest-win64-lgpl-shared/*.nupkg")
+            if ($packages.Count -eq 0) { throw "No .nupkg found in FFmpeg/ffmpeg-master-latest-win64-lgpl-shared/" }
+            foreach ($package in $packages) {
+                nuget push $package.FullName -Source https://api.nuget.org/v3/index.json -ApiKey "${{ steps.nuget-login-lgpl.outputs.NUGET_API_KEY }}"
+                if ($LASTEXITCODE -ne 0) { throw "nuget push failed with exit code $LASTEXITCODE" }
+            }
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
