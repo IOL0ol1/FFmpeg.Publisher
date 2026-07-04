@@ -1,4 +1,6 @@
-﻿ cd ../FFmpeg
+﻿$ErrorActionPreference = "Stop"
+
+ cd ../FFmpeg
 # Env
 $id = "FFmpeg.GPL"
 $license = "GPL-3.0-or-later"
@@ -42,3 +44,7 @@ $dstFile = "$id.$version.nuspec"
  
 # nuget pack
 nuget pack $dstFile
+if ($LASTEXITCODE -ne 0) {
+    throw "nuget pack failed with exit code $LASTEXITCODE"
+}
+
