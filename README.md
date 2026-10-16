@@ -15,6 +15,7 @@ https://github.com/BtbN/FFmpeg-Builds/releases
 [![NuGet version (FFmpeg.LGPL)](https://img.shields.io/nuget/v/FFmpeg.LGPL.svg)](https://www.nuget.org/packages/FFmpeg.LGPL/)
 [![NuGet downloads (FFmpeg.LGPL)](https://img.shields.io/nuget/dt/FFmpeg.LGPL.svg)](https://www.nuget.org/packages/FFmpeg.LGPL/) 
 
+Maybe you need https://github.com/IOL0ol1/ffmpeg-auto-builder
 
 --------------
 Last updated: 2026-10-16 00:36:29
