@@ -1,9 +1,9 @@
-Based on the official FFmpeg BtbN/FFmpeg-Builds. Support C/C++ and C# project.
+Based on the official FFmpeg FFmpeg-Builds/FFmpeg-Builds. Support C/C++ and C# project.
 
 This nuget package contains headers, import libraries, and runtime    
 dlls for FFmpeg for use with Visual Studio. It is based on the     
 FFmpeg windows builds from:   
-https://github.com/BtbN/FFmpeg-Builds/releases    
+https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases    
 
 FFmpeg is a pure C project, so to use the libraries within your C++    
 application you must encompass your FFmpeg includes using extern "C".    

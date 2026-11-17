@@ -10,7 +10,19 @@ $version = (Get-Date -Format "yyyyMMdd") + ".1.0"
 $zipFile = "./" + $folder + ".zip"
 
 # Download and expand FFmpeg
-Invoke-WebRequest -Uri "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip" -OutFile $zipFile
+$url = "https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/download/latest/$folder.zip"
+$maxAttempts = 5
+for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+    try {
+        Invoke-WebRequest -Uri $url -OutFile $zipFile
+        break
+    }
+    catch {
+        if ($attempt -eq $maxAttempts) { throw }
+        Write-Warning "Download failed (attempt $attempt/$maxAttempts): $($_.Exception.Message). Retrying in 30s..."
+        Start-Sleep -Seconds 30
+    }
+}
  
 Expand-Archive -Path $zipFile -DestinationPath ./ -Force
  
