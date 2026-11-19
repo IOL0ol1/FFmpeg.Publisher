@@ -18,4 +18,4 @@ https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases
 Maybe you need https://github.com/IOL0ol1/ffmpeg-auto-builder
 
 --------------
-Last updated: 2026-11-18 00:25:02
+Last updated: 2026-11-19 00:24:52
